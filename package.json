@@ -1,0 +1,24 @@
+{
+  "name": "burger",
+  "version": "1.0.0",
+  "description": "Full stack application made using Node.js, Express, Handlebars, and MySQL",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jxhnkndl/burger.git"
+  },
+  "author": "J.K. Royston",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jxhnkndl/burger/issues"
+  },
+  "homepage": "https://github.com/jxhnkndl/burger#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-handlebars": "^5.2.1",
+    "mysql": "^2.18.1"
+  }
+}
