@@ -1,4 +1,4 @@
-// Import modules
+// Import Express and Handlebars modules
 const express = require('express');
 const exphbs = require('express-handlebars');
 
@@ -6,7 +6,7 @@ const exphbs = require('express-handlebars');
 const routes = require('./controllers/burgers_controller');
 
 // Config PORT
-const port = process.env.PORT || 8080;
+const PORT = process.env.PORT || 8080;
 
 // Init Express
 const app = express();
@@ -14,7 +14,7 @@ const app = express();
 // Serve public front-end assets to client statically
 app.use(express.static('public'));
 
-// Data parsing middleware
+// Parse req/res body as JSON
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
@@ -22,7 +22,7 @@ app.use(express.json());
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 
-// Config imported routes
+// Use routes imported from controller
 app.use(routes);
 
 // Start listening

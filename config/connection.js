@@ -1,4 +1,4 @@
-// Import modules
+// Import MySQL
 const mysql = require('mysql');
 
 // Config database connection
