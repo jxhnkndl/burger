@@ -18,7 +18,21 @@ router.get('/', (req, res) => {
 // Add new burger
 router.post('/api/burgers', (req, res) => {
   burger.create(req.body, (result) => {
-    res.status(201).json({ id: result.insertId });
+    res.status(201).json({ 
+      success: true,
+      id: result.insertId 
+    });
+  });
+});
+
+// Update existing burger
+router.put('/api/burgers/:id', (req, res) => {
+  burger.update(req.body, req.params, (result) => {
+    if (result.affectedRows === 0) {
+      res.status(404).json({ success: false })
+    }
+
+    res.status(200).json({ success: true });
   });
 });
 
