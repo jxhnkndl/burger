@@ -76,6 +76,20 @@ const orm = {
       cb(res);
     });
   },
+
+  // Delete burger
+  deleteOne(table, condition, cb) {
+    let queryString = `DELETE FROM ${table} `;
+    queryString += `WHERE ${objToSql(condition)}`;
+
+    console.log(queryString);
+
+    connection.query(queryString, (err, res) => {
+      if (err) throw err;
+      cb(res);
+      connection.end();
+    });
+  },
 };
 
 // Export ORM object
