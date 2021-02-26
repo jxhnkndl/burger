@@ -41,9 +41,7 @@ const orm = {
   // Select all burgers
   selectAll(table, cb) {
     let queryString = `SELECT * FROM ${table}`;
-
     console.log(queryString);
-
     connection.query(queryString, (err, res) => {
       if (err) throw err;
       cb(res);
@@ -54,9 +52,7 @@ const orm = {
   insertOne(table, objColVals, cb) {
     let queryString = `INSERT INTO ${table} `;
     queryString += `SET ${objToSql(objColVals)}`;
-
     console.log(queryString);
-
     connection.query(queryString, (err, res) => {
       if (err) throw err;
       cb(res);
@@ -68,9 +64,7 @@ const orm = {
     let queryString = `UPDATE ${table} `;
     queryString += `SET ${objToSql(objColVals)} `;
     queryString += `WHERE ${objToSql(condition)}`;
-
     console.log(queryString);
-
     connection.query(queryString, (err, res) => {
       if (err) throw err;
       cb(res);
@@ -81,9 +75,7 @@ const orm = {
   deleteOne(table, condition, cb) {
     let queryString = `DELETE FROM ${table} `;
     queryString += `WHERE ${objToSql(condition)}`;
-
     console.log(queryString);
-
     connection.query(queryString, (err, res) => {
       if (err) throw err;
       cb(res);
