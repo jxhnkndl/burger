@@ -1,0 +1,54 @@
+{{!-- Header --}}
+<div class="header text-center mt-5">
+  <img id="burger-logo" src="/assets/img/burger.png" alt="">
+  <h1 class="display-2">mmmBURGER</h1>
+</div>
+
+{{!-- Form: Add Burger --}}
+<div class="row p-2">
+  <div class="col-8">
+    <input class="form-control form-control-lg" type="text" placeholder="Name a burger...">
+  </div>
+  <div class="col-4 d-grid gap-2">
+    <button class="btn btn-warning btn-dark" type="button">ADD IT!</button>
+  </div>
+</div>
+
+<hr>
+
+{{!-- Burger Database Output Container --}}
+<div id="burger-container" class="mx-auto">
+  <div class="row">
+
+    {{!-- List: Undevoured Burgers --}}
+    <div class="col-6 pr-0">
+      <ul id="not-eaten" class="list-group p-2">
+
+        {{#each burgers}}
+        {{#unless devoured}}
+        {{> burger_uneaten devoured=true}}
+        {{/unless}}
+        {{/each}}
+
+      </ul>
+    </div>
+
+    {{!-- List: Devoured Burgers --}}
+    <div class="col-6 pl-0">
+      <ul id="eaten" class="list-group p-2">
+
+        {{#each burgers}}
+        {{#if devoured}}
+        {{> burger_eaten devoured=false}}
+        {{/if}}
+        {{/each}}
+
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="fixed-bottom bg-dark text-light text-center py-2">
+  Copyright 2021
+</footer>
