@@ -1,0 +1,7 @@
+#burger-logo {
+  width: 150px;
+}
+
+.list-group-item-action:hover {
+  background-color: #cff4fc;
+}
