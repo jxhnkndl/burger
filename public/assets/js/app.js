@@ -19,6 +19,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     // Grab input field from DOM
     const formInput = document.getElementById('burger_name').value;
+    const regex = /^\s*$/;
+
+    if (!formInput || regex.test(formInput)) {
+      formInput.value = '';
+      console.log('Invalid input.');
+      return;
+    }
 
     // Find and format apostrophes to be SQL friendly
     const apiInput = replaceQuotes(formInput);
