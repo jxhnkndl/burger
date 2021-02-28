@@ -4,59 +4,80 @@ document.addEventListener('DOMContentLoaded', (event) => {
     console.log('DOM Loaded');
   }
 
-  // EVENT: ADD BURGER
+  // DOM elements
   const addBurgerBtn = document.getElementById('add_burger');
+  const listUneaten = document.getElementById('uneaten');
+  const listEaten = document.getElementById('eaten');
 
-  // Since content is being loaded dynamically, verify that
-  // this button is present in the DOM before proceeding
+  // // // // // // // //
+  //  Event Listeners  //
+  // // // // // // // //
 
-  if (addBurgerBtn) {
-    addBurgerBtn.addEventListener('click', (event) => {
-      event.preventDefault();
+  // Form button - Add new burger
+  addBurgerBtn.addEventListener('click', (event) => {
+    event.preventDefault();
 
-      // Grab input field from DOM
-      const input = document.getElementById('burger_name');
+    // Grab input field from DOM
+    const input = document.getElementById('burger_name');
 
-      // Format burger data to submit
-      const burger = {
-        burger_name: input.value.trim(),
-        devoured: false,
-      };
+    // Format burger data to submit
+    const burger = {
+      burger_name: input.value.trim(),
+      devoured: false,
+    };
 
-      // Confirm object mimics data model
-      console.log(burger);
+    // Confirm object mimics data model
+    console.log(burger);
 
-      // Send the new burger object to the controller
-      async function addBurger() {
-        const response = await fetch('/api/burgers', {
-          method: 'POST',
-          headers: {
-            Accept: 'application/json',
-            'Content-type': 'application/json',
-          },
-          body: JSON.stringify(burger),
-        });
+    // Send the new burger object to the controller
+    async function addBurger() {
+      const endpoint = '/api/burgers';
 
-        // Reset input after API responds to request
-        input.value = '';
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-type': 'application/json',
+        },
+        body: JSON.stringify(burger),
+      });
 
-        // Reload page
+      // Reset input and reload page to refresh database
+      input.value = '';
+      location.reload('/');
+    }
+
+    addBurger();
+  });
+
+  // Uneaten list - Eat buttons
+  listUneaten.addEventListener('click', (event) => {
+    // Parse and format request data
+    const { id } = event.target.dataset;
+    const devoured = { devoured: 1 };
+    const endpoint = `/api/burgers/${id}`;
+
+    // Submit PUT request to API to update devoured status
+    async function eatBurger() {
+      const response = await fetch(endpoint, {
+        method: 'PUT',
+        headers: {
+          Accept: 'application/json',
+          'Content-type': 'application/json'
+        },
+        body: JSON.stringify(devoured)
+      });
+
+      // If everything worked, reload the page to show
+      // the updated burger is now in the red eaten
+      // column. 
+      if (response.ok) {
         location.reload('/');
+      } else {
+        console.log(response.error);
       }
+    }
 
-      addBurger();
-    });
-  }
-
-  // EVENT: DEVOUR BURGER
-
-  const uneatenBurgers = document.querySelectorAll('.eaten');
-
-  console.log(uneatenBurgers[0]);
-
-  // uneatenBurgers.forEach(burger => {
-  //   console.log(burger.getAttribute('data-id'));
-  //   console.log(burger.getAttribute('data-devoured'));
-  // });
-
+    eatBurger();
+  });
 });
