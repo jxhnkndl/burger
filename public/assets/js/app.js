@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const formInput = document.getElementById('burger_name').value;
 
     // Find and format apostrophes to be SQL friendly
-    const apiInput = replaceQuotes(formInput); 
+    const apiInput = replaceQuotes(formInput);
 
     // Format burger data to submit
     const burger = {
@@ -63,26 +63,32 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const devoured = { devoured: 1 };
     const endpoint = `/api/burgers/${id}`;
 
-    // Send the burger's updated devour status to the controller
-    async function eatBurger() {
-      const response = await fetch(endpoint, {
-        method: 'PUT',
-        headers: {
-          Accept: 'application/json',
-          'Content-type': 'application/json'
-        },
-        body: JSON.stringify(devoured)
-      });
+    // Only make the API call if the button was clicked
+    if (event.target.dataset.id) {
 
-      // If everything worked, reload the page to refresh the data
-      if (response.ok) {
-        location.reload('/');
-      } else {
-        console.log('There was a problem making this request.');
+      // Send burger's id and devoured status to the controller
+      async function eatBurger() {
+        const response = await fetch(endpoint, {
+          method: 'PUT',
+          headers: {
+            Accept: 'application/json',
+            'Content-type': 'application/json',
+          },
+          body: JSON.stringify(devoured),
+        });
+  
+        // If everything worked, reload the page to refresh the data
+        if (response.ok) {
+          location.reload('/');
+        } else {
+          console.log('There was a problem making this request.');
+        }
       }
+  
+      eatBurger();
     }
 
-    eatBurger();
+
   });
 
   // Eaten list - Delete buttons
@@ -90,27 +96,29 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const { id } = event.target.dataset;
     const endpoint = `/api/burgers/${id}`;
 
-    console.log(id);
+    // Only make the API call if the button was clicked
+    if (event.target.dataset.id) {
 
-    // Send the deleted burger's id to the controller
-    async function deleteBurger() {
-      const response = await fetch(endpoint, {
-        method: 'DELETE',
-        headers: {
-          Accept: 'application/json',
-          'Content-type': 'application/json'
+      // Send the deleted burger's id to the controller
+      async function deleteBurger() {
+        const response = await fetch(endpoint, {
+          method: 'DELETE',
+          headers: {
+            Accept: 'application/json',
+            'Content-type': 'application/json',
+          },
+        });
+
+        // If everything worked, reload the page to refresh the data
+        if (response.ok) {
+          location.reload('/');
+        } else {
+          console.log('There was a problem making this request.');
         }
-      });
-
-      // If everything worked, reload the page to refresh the data
-      if (response.ok) {
-        location.reload('/');
-      } else {
-        console.log('There was a problem making this request.');
       }
-    }
 
-    deleteBurger();
+      deleteBurger();
+    }
   });
 
   // // // // // // // //
@@ -121,10 +129,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
   function replaceQuotes(str) {
     const strArr = str.split('');
     const outputArr = [];
-  
+
     for (let i = 0; i < strArr.length; i++) {
       outputArr.push(strArr[i]);
-  
+
       if (strArr[i] === "'") {
         outputArr.push(strArr[i]);
       }
