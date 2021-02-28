@@ -24,11 +24,11 @@
 
     {{!-- List: Undevoured Burgers --}}
     <div class="col-6 pr-0">
-      <ul id="not-eaten" class="list-group p-2">
+      <ul id="uneaten" class="list-group p-2">
 
         {{#each burgers}}
         {{#unless devoured}}
-        {{> burger_uneaten devoured=false}}
+        {{> burger_uneaten devoured=0}}
         {{/unless}}
         {{/each}}
 
@@ -41,7 +41,7 @@
 
         {{#each burgers}}
         {{#if devoured}}
-        {{> burger_eaten devoured=true}}
+        {{> burger_eaten devoured=1}}
         {{/if}}
         {{/each}}
 
