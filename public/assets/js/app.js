@@ -42,22 +42,25 @@ document.addEventListener('DOMContentLoaded', (event) => {
         body: JSON.stringify(burger),
       });
 
-      // Reset input and reload page to refresh database
-      input.value = '';
-      location.reload('/');
+      // If everything worked, reload the page to refresh the data
+      if (response.ok) {
+        input.value = '';
+        location.reload('/');
+      } else {
+        console.log('There was a problem making this request.');
+      }
     }
 
     addBurger();
   });
 
-  // Uneaten list - Eat buttons
+  // Uneaten list - Devour buttons
   listUneaten.addEventListener('click', (event) => {
-    // Parse and format request data
     const { id } = event.target.dataset;
     const devoured = { devoured: 1 };
     const endpoint = `/api/burgers/${id}`;
 
-    // Submit PUT request to API to update devoured status
+    // Send the burger's updated devour status to the controller
     async function eatBurger() {
       const response = await fetch(endpoint, {
         method: 'PUT',
@@ -68,16 +71,42 @@ document.addEventListener('DOMContentLoaded', (event) => {
         body: JSON.stringify(devoured)
       });
 
-      // If everything worked, reload the page to show
-      // the updated burger is now in the red eaten
-      // column. 
+      // If everything worked, reload the page to refresh the data
       if (response.ok) {
         location.reload('/');
       } else {
-        console.log(response.error);
+        console.log('There was a problem making this request.');
       }
     }
 
     eatBurger();
+  });
+
+  // Eaten list - Delete buttons
+  listEaten.addEventListener('click', (event) => {
+    const { id } = event.target.dataset;
+    const endpoint = `/api/burgers/${id}`;
+
+    console.log(id);
+
+    // Send the deleted burger's id to the controller
+    async function deleteBurger() {
+      const response = await fetch(endpoint, {
+        method: 'DELETE',
+        headers: {
+          Accept: 'application/json',
+          'Content-type': 'application/json'
+        }
+      });
+
+      // If everything worked, reload the page to refresh the data
+      if (response.ok) {
+        location.reload('/');
+      } else {
+        console.log('There was a problem making this request.');
+      }
+    }
+
+    deleteBurger();
   });
 });
