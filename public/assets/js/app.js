@@ -18,11 +18,14 @@ document.addEventListener('DOMContentLoaded', (event) => {
     event.preventDefault();
 
     // Grab input field from DOM
-    const input = document.getElementById('burger_name');
+    const formInput = document.getElementById('burger_name').value;
+
+    // Find and format apostrophes to be SQL friendly
+    const apiInput = replaceQuotes(formInput); 
 
     // Format burger data to submit
     const burger = {
-      burger_name: input.value.trim(),
+      burger_name: apiInput.trim(),
       devoured: false,
     };
 
@@ -44,7 +47,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
       // If everything worked, reload the page to refresh the data
       if (response.ok) {
-        input.value = '';
+        formInput.value = '';
         location.reload('/');
       } else {
         console.log('There was a problem making this request.');
@@ -109,4 +112,24 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     deleteBurger();
   });
+
+  // // // // // // // //
+  // HELPER FUNCTIONS  //
+  // // // // // // // //
+
+  // Helper: Find and SQL proof apostrophes in user input
+  function replaceQuotes(str) {
+    const strArr = str.split('');
+    const outputArr = [];
+  
+    for (let i = 0; i < strArr.length; i++) {
+      outputArr.push(strArr[i]);
+  
+      if (strArr[i] === "'") {
+        outputArr.push(strArr[i]);
+      }
+    }
+
+    return outputArr.join('');
+  }
 });
