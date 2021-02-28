@@ -79,7 +79,6 @@ const orm = {
     connection.query(queryString, (err, res) => {
       if (err) throw err;
       cb(res);
-      connection.end();
     });
   },
 };
