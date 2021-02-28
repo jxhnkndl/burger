@@ -5,14 +5,16 @@
 </div>
 
 {{!-- Form: Add Burger --}}
-<div class="row p-2">
-  <div class="col-8">
-    <input class="form-control form-control-lg" type="text" placeholder="Name a burger...">
+<form>
+  <div class="row p-2">
+    <div class="col-8 ">
+      <input id="burger_name" class="form-control form-control-lg" type="text" placeholder="Name a burger...">
+    </div>
+    <div class="col-4 d-grid gap-2">
+      <button id="add_burger" class="btn btn-warning btn-dark" type="submit">ADD IT!</button>
+    </div>
   </div>
-  <div class="col-4 d-grid gap-2">
-    <button class="btn btn-warning btn-dark" type="button">ADD IT!</button>
-  </div>
-</div>
+</form>
 
 <hr>
 
@@ -26,7 +28,7 @@
 
         {{#each burgers}}
         {{#unless devoured}}
-        {{> burger_uneaten devoured=true}}
+        {{> burger_uneaten devoured=false}}
         {{/unless}}
         {{/each}}
 
@@ -39,7 +41,7 @@
 
         {{#each burgers}}
         {{#if devoured}}
-        {{> burger_eaten devoured=false}}
+        {{> burger_eaten devoured=true}}
         {{/if}}
         {{/each}}
 

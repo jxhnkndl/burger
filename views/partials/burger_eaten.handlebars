@@ -1,7 +1,9 @@
-<li class="uneaten list-group-item uneaten list-group-item-danger d-flex justify-content-between align-items-center h4 p-3 my-2 border-0 rounded">
+<li class="eaten list-group-item list-group-item-danger d-flex justify-content-between align-items-center h4 p-3 my-2 border-0 rounded">
 
   {{burger_name}}
 
-  <span class="badge bg-danger rounded-pill">YUM!</span>
+  <button class="btn btn-lg btn-danger mb-0 h4 text-light fw-bold" data-id="{{id}}" data-devoured="{{devoured}}">
+    DELETE
+  </button>
 
 </li>

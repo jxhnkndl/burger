@@ -1,7 +1,7 @@
-#burger-logo {
-  width: 150px;
+body {
+  margin-bottom: 100px;
 }
 
-.list-group-item-action:hover {
-  background-color: #cff4fc;
+#burger-logo {
+  width: 150px;
 }
