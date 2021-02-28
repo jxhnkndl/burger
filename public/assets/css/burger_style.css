@@ -1,7 +1,18 @@
+/* Custom Styles */
+
 body {
   margin-bottom: 100px;
 }
 
 #burger-logo {
   width: 150px;
+}
+
+/* Helper Classes */
+.roboto {
+  font-family: 'Roboto', 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.roboto-slab {
+  font-family: 'Roboto Slab', Georgia, 'Times New Roman', Times, serif;
 }

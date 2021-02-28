@@ -1,8 +1,11 @@
 {{!-- Header --}}
-<div class="header text-center mt-5">
+<div class="header text-center mt-5 mb-3">
   <img id="burger-logo" src="/assets/img/burger.png" alt="">
-  <h1 class="display-2">mmmBURGER</h1>
+  <h1 class="display-2 roboto-slab text-warning mb-4">
+    burger<span class="text-dark">.js</span></h1>
 </div>
+
+<hr>
 
 {{!-- Form: Add Burger --}}
 <form>
@@ -19,12 +22,13 @@
 <hr>
 
 {{!-- Burger Database Output Container --}}
-<div id="burger-container" class="mx-auto">
+<div id="burger-container" class="mx-auto mt-5">
   <div class="row">
 
     {{!-- List: Undevoured Burgers --}}
-    <div class="col-6 pr-0">
-      <ul id="uneaten" class="list-group p-2">
+    <div class="col-12 col-md-6 pr-0">
+      <p class="display-4 roboto-slab text-center fs-1 mb-0">WANT TO EAT</p>
+      <ul id="uneaten" class="list-group roboto fw-light p-2">
 
         {{#each burgers}}
         {{#unless devoured}}
@@ -36,8 +40,9 @@
     </div>
 
     {{!-- List: Devoured Burgers --}}
-    <div class="col-6 pl-0">
-      <ul id="eaten" class="list-group p-2">
+    <div class="col-12 col-md-6 pl-0">
+      <p class="display-4 roboto-slab text-center fs-1 mb-0">DEVOURED</p>
+      <ul id="eaten" class="list-group roboto p-2">
 
         {{#each burgers}}
         {{#if devoured}}
@@ -51,6 +56,12 @@
 </div>
 
 <!-- Footer -->
-<footer class="fixed-bottom bg-dark text-light text-center py-2">
-  Copyright 2021
+<footer class="fixed-bottom bg-dark text-center py-2">
+  <div id="badges">
+    <span class="badge rounded-pill bg-dark">Node.js</span>
+    <span class="badge rounded-pill bg-dark">Express</span>
+    <span class="badge rounded-pill bg-dark">MySQL</span>
+    <span class="badge rounded-pill bg-dark">Handlebars.js</span>
+    <span class="badge rounded-pill bg-dark">Bootstrap 5</span>
+  </div>
 </footer>
