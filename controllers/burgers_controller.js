@@ -16,6 +16,7 @@ router.get('/', (req, res) => {
       burgers: result,
     };
 
+    // Confirm object mimics model
     console.log(burgerObj);
 
     // Return dynamically generated index view
@@ -26,6 +27,7 @@ router.get('/', (req, res) => {
 // Add new burger
 router.post('/api/burgers', (req, res) => {
   burger.create(req.body, (result) => {
+    // If successful, return status object to client
     res.status(201).json({
       success: true,
       id: result.insertId,
@@ -36,10 +38,12 @@ router.post('/api/burgers', (req, res) => {
 // Update existing burger
 router.put('/api/burgers/:id', (req, res) => {
   burger.update(req.body, req.params, (result) => {
+    // If update fails, send 404 back to client
     if (result.affectedRows === 0) {
       res.status(404).json({ success: false });
     }
 
+    // If update succeeds, return status object to client
     res.status(200).json({ success: true });
   });
 });
