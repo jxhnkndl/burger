@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
   const listDevoured = document.getElementById('eaten');
   const container = document.querySelector('.container');
   const form = document.querySelector('form');
-  const formBottom = document.getElementById('form-bottom');
 
   // // // // // // // //
   //  Event Listeners  //
