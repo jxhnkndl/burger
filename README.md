@@ -54,13 +54,25 @@ The following represents the application's table schema:
 
 id     | burger_name | devoured   | createdAt |
 -------|-------------|------------|-----------|
-Number | String      | True/False | Timestamp |
+Number | String      | True/False | Timestamp |  
+
+
+## Usage
+Once npm packages have been installed and the database has been initialized, the application can be run in regular mode:
+```
+npm start
+```
+Or in continuous mode (server refreshes automatically if code changes):
+```
+npm run watch
+```
+**Note:** For testing purposes, the MySQL password included in the connection module is set to the public key of 'password'. To run the application locally, some settings inside `connection.js` may need to be changed.
 
 
 ## Application Demo
-The following video documents the functionality of Burger.js. Use this video to supplement the documentation above: 
+The following video documents the core functionality of Burger.js:
 
-[![Application Preview](assets/demo-gifs/team-profile-generator-demo.gif)](https://drive.google.com/file/d/1nJ2gbuWn2ufELPXuDB2jVWeGVIfOp53m/view)
+[![Application Preview](assets/demo-gifs/burger-demo.gif)](https://drive.google.com/file/d/1nJ2gbuWn2ufELPXuDB2jVWeGVIfOp53m/view)
 
 
 ## License
