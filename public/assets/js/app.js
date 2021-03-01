@@ -1,4 +1,3 @@
-// EVENT: DOM LOAD
 document.addEventListener('DOMContentLoaded', (event) => {
   if (event) {
     console.log('DOM Loaded');
@@ -6,8 +5,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
   // DOM elements
   const addBurgerBtn = document.getElementById('add_burger');
-  const listUneaten = document.getElementById('uneaten');
-  const listEaten = document.getElementById('eaten');
+  const listOnDeck = document.getElementById('uneaten');
+  const listDevoured = document.getElementById('eaten');
+  const container = document.querySelector('.container');
+  const form = document.querySelector('form');
+  const formBottom = document.getElementById('form-bottom');
 
   // // // // // // // //
   //  Event Listeners  //
@@ -22,6 +24,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const regex = /^\s*$/;
 
     if (!formInput || regex.test(formInput)) {
+      showAlert(
+        'alert-danger',
+        "Whoops! A blank burger just won't do! Double check your input and try again."
+      );
       formInput.value = '';
       console.log('Invalid input.');
       return;
@@ -57,7 +63,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
         formInput.value = '';
         location.reload('/');
       } else {
-        console.log('There was a problem making this request.');
+        showAlert(
+          'alert-danger',
+          'Whoops! Looks like something went wrong on our end. Let\'s try again!'
+        );
       }
     }
 
@@ -65,14 +74,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
   });
 
   // Uneaten list - Devour buttons
-  listUneaten.addEventListener('click', (event) => {
+  listOnDeck.addEventListener('click', (event) => {
     const { id } = event.target.dataset;
     const devoured = { devoured: 1 };
     const endpoint = `/api/burgers/${id}`;
 
     // Only make the API call if the button was clicked
     if (event.target.dataset.id) {
-
       // Send burger's id and devoured status to the controller
       async function eatBurger() {
         const response = await fetch(endpoint, {
@@ -83,29 +91,29 @@ document.addEventListener('DOMContentLoaded', (event) => {
           },
           body: JSON.stringify(devoured),
         });
-  
+
         // If everything worked, reload the page to refresh the data
         if (response.ok) {
           location.reload('/');
         } else {
-          console.log('There was a problem making this request.');
+          showAlert(
+            'alert-danger',
+            'Whoops! Looks like something went wrong on our end. Let\'s try again!'
+          );
         }
       }
-  
+
       eatBurger();
     }
-
-
   });
 
   // Eaten list - Delete buttons
-  listEaten.addEventListener('click', (event) => {
+  listDevoured.addEventListener('click', (event) => {
     const { id } = event.target.dataset;
     const endpoint = `/api/burgers/${id}`;
 
     // Only make the API call if the button was clicked
     if (event.target.dataset.id) {
-
       // Send the deleted burger's id to the controller
       async function deleteBurger() {
         const response = await fetch(endpoint, {
@@ -120,7 +128,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
         if (response.ok) {
           location.reload('/');
         } else {
-          console.log('There was a problem making this request.');
+          showAlert(
+            'alert-danger',
+            'Whoops! Looks like something went wrong on our end. Let\'s try again!'
+          );
         }
       }
 
@@ -146,5 +157,28 @@ document.addEventListener('DOMContentLoaded', (event) => {
     }
 
     return outputArr.join('');
+  }
+
+  // Helper: Create alert
+  function showAlert(className, message) {
+    // Create alert div element
+    const alertDiv = document.createElement('div');
+    alertDiv.className = `alert ${className} mt-2 d-flex justify-content-center align-items-center`;
+
+    // Create alert message
+    const paragraph = document.createElement('p');
+    paragraph.className = `roboto mb-0`;
+    paragraph.innerText = message;
+
+    // Add message to alert div
+    alertDiv.appendChild(paragraph);
+
+    // Insert into the DOM
+    container.insertBefore(alertDiv, form);
+
+    // Remove alert after 3 seconds
+    setTimeout(() => {
+      document.querySelector('.alert').remove();
+    }, 3000);
   }
 });
