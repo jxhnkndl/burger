@@ -72,7 +72,7 @@ npm run watch
 ## Application Demo
 The following video documents the core functionality of Burger.js:
 
-[![Application Preview](assets/demo-gifs/burger-demo.gif)](https://drive.google.com/file/d/1nJ2gbuWn2ufELPXuDB2jVWeGVIfOp53m/view)
+[![Application Preview](assets/demo-gifs/burger-js-demo.gif)](https://drive.google.com/file/d/1nJ2gbuWn2ufELPXuDB2jVWeGVIfOp53m/view)
 
 
 ## License
